@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rei das Antenas | Antenas, câmeras e portões em Santa Bárbara d'Oeste</title>
+  <meta name="description" content="Instalação e manutenção de antenas digitais e parabólicas, câmeras de segurança, portões automáticos e eletrônicos em Santa Bárbara d'Oeste. Loja de peças no Centro.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== Navegação ===== -->
+  <header class="nav" id="topo">
+    <div class="wrap nav-inner">
+      <a href="#topo" class="brand" aria-label="Rei das Antenas, início">
+        <!-- TODO: trocar pelo arquivo oficial da logo (assets/img/logo.png ou .svg) -->
+        <span class="brand-mark">
+          <svg class="crown" viewBox="0 0 24 16" aria-hidden="true"><path d="M2 14 1 3l6 5 5-7 5 7 6-5-1 11z"/></svg>
+          Rei das<br>Antenas
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Seções">
+        <a href="#servicos">Serviços</a>
+        <a href="#loja">Loja</a>
+        <a href="#como">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a href="tel:+551941223611" class="nav-phone">(19) 4122-3611</a>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuMobile" aria-label="Abrir menu">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
+      <a href="#servicos">Serviços</a>
+      <a href="#loja">Loja</a>
+      <a href="#como">Como funciona</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Antena, câmera e portão funcionando de novo.</h1>
+          <p class="hero-lead">
+            Instalação, manutenção e peças em Santa Bárbara d'Oeste.
+            Loja no Centro e atendimento na sua casa ou empresa.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+              Pedir orçamento no WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="tel:+551941223611">Ligar (19) 4122-3611</a>
+          </div>
+          <p class="hero-address">Rua XV de Novembro, 535, Centro</p>
+        </div>
+
+        <!-- Medidor de sinal: o momento animado da página -->
+        <div class="signal" aria-hidden="true">
+          <svg class="signal-art" viewBox="0 0 320 300">
+            <g class="waves" fill="none" stroke-linecap="round">
+              <path class="wave w1" d="M120 92a56 56 0 0 1 80 0"/>
+              <path class="wave w2" d="M98 70a88 88 0 0 1 124 0"/>
+              <path class="wave w3" d="M76 48a120 120 0 0 1 168 0"/>
+            </g>
+            <!-- antena digital (estilo espinha de peixe) -->
+            <g class="antenna" stroke-linecap="round">
+              <line x1="160" y1="118" x2="160" y2="262"/>
+              <line x1="112" y1="132" x2="208" y2="132"/>
+              <line x1="120" y1="152" x2="200" y2="152"/>
+              <line x1="128" y1="172" x2="192" y2="172"/>
+              <line x1="136" y1="192" x2="184" y2="192"/>
+              <line x1="70" y1="262" x2="250" y2="262"/>
+            </g>
+            <circle class="tip" cx="160" cy="114" r="6"/>
+          </svg>
+
+          <div class="meter">
+            <div class="meter-head">
+              <span>Qualidade do sinal</span>
+              <strong id="meterValue">0%</strong>
+            </div>
+            <div class="bars">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <p class="meter-status" id="meterStatus">Sintonizando…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Serviços (cards interativos) ===== -->
+    <section class="section" id="servicos">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>O que a gente resolve</h2>
+          <p>Toque em um serviço para ver o que está incluído.</p>
+        </header>
+
+        <!-- TODO: confirmar com a loja a lista exata de serviços de cada card -->
+        <div class="services">
+
+          <article class="service service-feature" data-reveal>
+            <button class="service-toggle" aria-expanded="false">
+              <span class="service-icon icon-antenna" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path class="ic-wave" d="M15 13a13 13 0 0 1 18 0M10 8a20 20 0 0 1 28 0"/><path d="M24 18v24M14 22h20M16 28h16M18 34h12M10 42h28"/></svg>
+              </span>
+              <span class="service-title">Antenas digitais e parabólicas</span>
+              <span class="service-sub">A especialidade da casa</span>
+              <span class="plus" aria-hidden="true"></span>
+            </button>
+            <div class="service-body">
+              <div class="service-inner">
+              <ul>
+                <li>Instalação de antena digital e parabólica</li>
+                <li>Apontamento e ajuste de sinal</li>
+                <li>Troca de cabos, conectores e divisores</li>
+                <li>Instalação de filtro contra interferência do 5G</li>
+                <li>Antena coletiva para prédios e condomínios</li>
+              </ul>
+              <a class="service-cta" data-service="antena digital ou parabólica" href="#">Pedir orçamento deste serviço</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="service" data-reveal>
+            <button class="service-toggle" aria-expanded="false">
+              <span class="service-icon icon-camera" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M6 14h26l8 6-8 6H6z"/><circle class="ic-lens" cx="30" cy="20" r="2.5"/><path d="M14 26v8M8 34h12"/></svg>
+              </span>
+              <span class="service-title">Câmeras de segurança</span>
+              <span class="service-sub">Veja sua casa pelo celular</span>
+              <span class="plus" aria-hidden="true"></span>
+            </button>
+            <div class="service-body">
+              <div class="service-inner">
+              <ul>
+                <li>Instalação de câmeras e gravador</li>
+                <li>Acesso às imagens pelo celular</li>
+                <li>Manutenção e troca de câmeras</li>
+              </ul>
+              <a class="service-cta" data-service="câmeras de segurança" href="#">Pedir orçamento deste serviço</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="service" data-reveal>
+            <button class="service-toggle" aria-expanded="false">
+              <span class="service-icon icon-gate" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M4 40h40M6 40V12M42 40V12"/><g class="ic-gate"><path d="M10 16h18v24H10zM16 16v24M22 16v24"/></g></svg>
+              </span>
+              <span class="service-title">Portões automáticos</span>
+              <span class="service-sub">Motor, controle e conserto</span>
+              <span class="plus" aria-hidden="true"></span>
+            </button>
+            <div class="service-body">
+              <div class="service-inner">
+              <ul>
+                <li>Instalação de motor de portão</li>
+                <li>Conserto e manutenção preventiva</li>
+                <li>Controles remotos novos e cópias</li>
+              </ul>
+              <a class="service-cta" data-service="portão automático" href="#">Pedir orçamento deste serviço</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="service" data-reveal>
+            <button class="service-toggle" aria-expanded="false">
+              <span class="service-icon icon-chip" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><rect x="12" y="12" width="24" height="24" rx="3"/><path d="M18 6v6M24 6v6M30 6v6M18 36v6M24 36v6M30 36v6M6 18h6M6 30h6M36 18h6M36 30h6"/><path class="ic-pulse" d="M17 24h4l2-4 3 8 2-4h3"/></svg>
+              </span>
+              <span class="service-title">Eletrônicos em geral</span>
+              <span class="service-sub">Diagnóstico e reparo</span>
+              <span class="plus" aria-hidden="true"></span>
+            </button>
+            <div class="service-body">
+              <div class="service-inner">
+              <ul>
+                <li>Interfones e porteiros eletrônicos</li>
+                <li>Receptores e conversores digitais</li>
+                <li>Instalação de suporte de TV</li>
+              </ul>
+              <a class="service-cta" data-service="eletrônicos" href="#">Pedir orçamento deste serviço</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Loja de peças ===== -->
+    <section class="section section-tint" id="loja">
+      <div class="wrap shop">
+        <div class="shop-copy" data-reveal>
+          <h2>Peças e acessórios na loja</h2>
+          <p>
+            Precisa só da peça? Passe na Rua XV de Novembro ou pergunte pelo WhatsApp
+            se temos em estoque antes de sair de casa.
+          </p>
+          <a class="btn btn-primary" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Gostaria%20de%20saber%20se%20voc%C3%AAs%20t%C3%AAm%20uma%20pe%C3%A7a%20em%20estoque." target="_blank" rel="noopener">Consultar estoque</a>
+        </div>
+
+        <!-- TODO: confirmar com a loja os produtos vendidos -->
+        <ul class="shop-list">
+          <li data-reveal>Antenas digitais e parabólicas</li>
+          <li data-reveal>Cabos, conectores e divisores</li>
+          <li data-reveal>Receptores e conversores</li>
+          <li data-reveal>Controles de portão</li>
+          <li data-reveal>Câmeras e acessórios</li>
+          <li data-reveal>Filtros contra interferência 5G</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Como funciona (sequência real, por isso numerada) ===== -->
+    <section class="section" id="como">
+      <div class="wrap">
+        <header class="section-head">
+          <h2>Como funciona</h2>
+        </header>
+        <ol class="steps">
+          <li data-reveal>
+            <h3>Você chama</h3>
+            <p>Mande uma mensagem contando o problema. Uma foto ajuda a entender mais rápido.</p>
+          </li>
+          <li data-reveal>
+            <h3>A gente avalia</h3>
+            <p>Você recebe o orçamento antes de qualquer serviço começar.</p>
+          </li>
+          <li data-reveal>
+            <h3>Tudo testado na hora</h3>
+            <p>O técnico só vai embora depois de conferir com você que está funcionando.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Dúvidas frequentes ===== -->
+    <section class="section section-tint" id="duvidas">
+      <div class="wrap faq-wrap">
+        <header class="section-head">
+          <h2>Dúvidas frequentes</h2>
+        </header>
+        <!-- TODO: revisar as respostas com a loja -->
+        <div class="faq">
+          <details>
+            <summary>Vocês atendem em casa?</summary>
+            <p>Sim. A instalação e a manutenção são feitas no local, em casas, prédios e empresas de Santa Bárbara d'Oeste e região.</p>
+          </details>
+          <details>
+            <summary>Minha antena digital perdeu canais. Tem conserto?</summary>
+            <p>Na maioria das vezes, sim. Pode ser apontamento, cabo, conector ou interferência do sinal 5G, que se resolve com um filtro.</p>
+          </details>
+          <details>
+            <summary>O orçamento é cobrado?</summary>
+            <p>Mande sua mensagem no WhatsApp e explicamos as condições para o seu caso.</p>
+          </details>
+          <details>
+            <summary>Posso comprar só a peça e instalar sozinho?</summary>
+            <p>Pode. A loja vende peças e acessórios avulsos, e a gente explica como usar.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contato ===== -->
+    <section class="contact" id="contato">
+      <div class="wrap contact-grid">
+        <div class="contact-copy">
+          <h2>Fale com o Rei das Antenas</h2>
+          <p>Resposta pelo WhatsApp ou pelo telefone da loja.</p>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp (19) 97409-4897</a>
+            <a class="btn btn-light" href="tel:+551941223611">Ligar (19) 4122-3611</a>
+          </div>
+
+          <dl class="contact-info">
+            <div><dt>Endereço</dt><dd>Rua XV de Novembro, 535<br>Centro, Santa Bárbara d'Oeste, SP</dd></div>
+            <div><dt>E-mail</dt><dd><a href="mailto:reidasantenassbo@gmail.com">reidasantenassbo@gmail.com</a></dd></div>
+            <!-- TODO: confirmar o horário de funcionamento -->
+            <div><dt>Horário</dt><dd>Segunda a sexta, horário comercial</dd></div>
+          </dl>
+        </div>
+
+        <div class="map">
+          <iframe
+            title="Mapa da loja Rei das Antenas"
+            src="https://www.google.com/maps?q=Rua%20XV%20de%20Novembro%2C%20535%2C%20Santa%20B%C3%A1rbara%20d'Oeste%20SP&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© <span id="year"></span> Rei das Antenas. Santa Bárbara d'Oeste, SP.</p>
+      <a href="https://www.facebook.com/profile.php?id=100067492614341" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </footer>
+
+  <!-- Barra fixa no celular -->
+  <div class="mobile-bar">
+    <a href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="mb-wa">WhatsApp</a>
+    <a href="tel:+551941223611" class="mb-call">Ligar</a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
