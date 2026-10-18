@@ -141,7 +141,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 /* medidor de sinal */
 .signal { position: relative; display: grid; justify-items: center; }
 .signal-art { width: min(100%, 300px); }
-.antenna line { stroke: rgba(255, 255, 255, .9); stroke-width: 6; }
+.antenna line, .ground { stroke: rgba(255, 255, 255, .9); stroke-width: 6; }
 .tip { fill: var(--red); }
 .wave { stroke: var(--white); stroke-width: 6; stroke-dasharray: 220; stroke-dashoffset: 220; opacity: .9; }
 .signal.on .w1 { animation: draw .6s var(--ease) .2s forwards, breathe 3.2s ease-in-out 1.6s infinite; }
@@ -149,6 +149,25 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .signal.on .w3 { animation: draw .6s var(--ease) .7s forwards, breathe 3.2s ease-in-out 2.2s infinite; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes breathe { 50% { opacity: .35; } }
+
+/* antena balançando de leve, como ao vento, presa pela base */
+.antenna, .tip {
+  transform-box: view-box;
+  transform-origin: 160px 262px;
+}
+.signal.on .antenna, .signal.on .tip { animation: sway 4.5s ease-in-out 1.4s infinite; }
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(2.5deg); }
+}
+/* ponta da antena pisca como um transmissor */
+.signal.on .tip { animation: sway 4.5s ease-in-out 1.4s infinite, blinkTip 1.6s steps(1) 1.4s infinite; }
+@keyframes blinkTip { 50% { fill: #ff6b6b; } }
+
+/* número do medidor dá um leve "pulo" ao mudar */
+.meter-head strong.tick { animation: tick .35s var(--ease); }
+@keyframes tick { 40% { transform: translateY(-3px); color: var(--blue); } }
 
 .meter {
   width: min(100%, 300px);

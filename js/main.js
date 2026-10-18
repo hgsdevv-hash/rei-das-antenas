@@ -56,8 +56,22 @@ function tune() {
       setMeter(FINAL);
       meterStatus.textContent = "Sinal excelente";
       meterStatus.classList.add("ok");
+      fluctuate();
     }
   }, 50);
+}
+
+// depois de sintonizar, o sinal fica oscilando entre 98% e 100%
+function fluctuate() {
+  const steps = [99, 100, 99, 98, 100, 99, 98];
+  let i = 0;
+  setInterval(() => {
+    setMeter(steps[i % steps.length]);
+    meterValue.classList.remove("tick");
+    void meterValue.offsetWidth;            // reinicia a animação do número
+    meterValue.classList.add("tick");
+    i++;
+  }, 1400);
 }
 setTimeout(tune, 300);
 
