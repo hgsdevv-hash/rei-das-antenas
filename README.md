@@ -21,6 +21,8 @@ Abra o `index.html` no navegador. Não precisa instalar nada.
 
 - Trocar a marca desenhada pela logo oficial em `assets/img/`
 - Confirmar com a loja a lista de serviços e produtos
-- Confirmar o horário de funcionamento
 - Revisar as respostas das dúvidas frequentes
 - Adicionar fotos reais de instalações
+- Pedir à loja autorização para os depoimentos do Google exibidos no site
+- Trocar o botão "Avaliar a loja" pelo link curto oficial (Perfil da Empresa > Pedir avaliações)
+- Dono da loja: adicionar o endereço do site no Perfil da Empresa no Google
