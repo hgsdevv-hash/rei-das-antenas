@@ -40,9 +40,68 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
+  <script>
+    (function () {
+      var h = document.documentElement;
+      try {
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("intro-vista")) {
+          h.classList.add("js-intro");
+          sessionStorage.setItem("intro-vista", "1");
+        }
+      } catch (e) { /* sem sessionStorage: segue sem abertura */ }
+    })();
+  </script>
 </head>
 <body>
+
+  <!-- ===== Abertura: a antena se monta como Lego e a tela se abre ===== -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-half intro-top"></div>
+    <div class="intro-half intro-bottom"></div>
+
+    <div class="intro-stage">
+      <svg class="lego" viewBox="0 0 240 270">
+        <!-- ondas de sinal (acendem no fim) -->
+        <g class="lego-waves" fill="none" stroke-linecap="round">
+          <path d="M96 40a34 34 0 0 1 48 0"/>
+          <path d="M82 26a54 54 0 0 1 76 0"/>
+          <path d="M68 12a74 74 0 0 1 104 0"/>
+        </g>
+        <!-- cada peça é um bloco com "pinos" em cima, como Lego -->
+        <g class="brick b-base" style="--i:0; --fx:0; --r:-8deg">
+          <rect x="44" y="236" width="152" height="22" rx="3"/>
+          <g class="studs"><rect x="56" y="230" width="18" height="7" rx="2"/><rect x="88" y="230" width="18" height="7" rx="2"/><rect x="134" y="230" width="18" height="7" rx="2"/><rect x="166" y="230" width="18" height="7" rx="2"/></g>
+        </g>
+        <g class="brick b-mast" style="--i:1; --fx:0; --r:6deg">
+          <rect x="110" y="70" width="20" height="166" rx="3"/>
+        </g>
+        <g class="brick b-bar" style="--i:2; --fx:-140px; --r:-14deg">
+          <rect x="62" y="84" width="116" height="16" rx="3"/>
+          <g class="studs"><rect x="70" y="78" width="16" height="7" rx="2"/><rect x="154" y="78" width="16" height="7" rx="2"/></g>
+        </g>
+        <g class="brick b-bar" style="--i:3; --fx:140px; --r:12deg">
+          <rect x="72" y="116" width="96" height="16" rx="3"/>
+          <g class="studs"><rect x="80" y="110" width="16" height="7" rx="2"/><rect x="144" y="110" width="16" height="7" rx="2"/></g>
+        </g>
+        <g class="brick b-bar" style="--i:4; --fx:-140px; --r:-10deg">
+          <rect x="82" y="148" width="76" height="16" rx="3"/>
+          <g class="studs"><rect x="88" y="142" width="14" height="7" rx="2"/><rect x="138" y="142" width="14" height="7" rx="2"/></g>
+        </g>
+        <g class="brick b-bar" style="--i:5; --fx:140px; --r:10deg">
+          <rect x="92" y="180" width="56" height="16" rx="3"/>
+          <g class="studs"><rect x="96" y="174" width="12" height="7" rx="2"/><rect x="132" y="174" width="12" height="7" rx="2"/></g>
+        </g>
+        <g class="brick b-tip" style="--i:6; --fx:0; --r:0deg">
+          <rect x="108" y="50" width="24" height="20" rx="5"/>
+          <rect x="113" y="44" width="14" height="7" rx="2"/>
+        </g>
+      </svg>
+      <p class="intro-brand">Rei das Antenas</p>
+      <p class="intro-sub">sintonizando o sinal</p>
+    </div>
+  </div>
 
   <!-- ===== Navegação ===== -->
   <header class="nav" id="topo">
@@ -57,7 +116,7 @@
 
       <nav class="nav-links" aria-label="Seções">
         <a href="#servicos">Serviços</a>
-        <a href="#loja">Loja</a>
+        <a href="#catalogo">Catálogo</a>
         <a href="#como">Como funciona</a>
         <a href="#contato">Contato</a>
       </nav>
@@ -71,7 +130,7 @@
 
     <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
       <a href="#servicos">Serviços</a>
-      <a href="#loja">Loja</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#como">Como funciona</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -237,29 +296,49 @@
       </div>
     </section>
 
-    <!-- ===== Loja de peças ===== -->
-    <section class="section section-tint" id="loja">
-      <div class="wrap shop">
-        <div class="shop-copy" data-reveal>
-          <h2>Peças e acessórios na loja</h2>
-          <p>
-            Precisa só da peça? Passe na Rua XV de Novembro ou pergunte pelo WhatsApp
-            se temos em estoque antes de sair de casa.
-          </p>
-          <a class="btn btn-primary" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Gostaria%20de%20saber%20se%20voc%C3%AAs%20t%C3%AAm%20uma%20pe%C3%A7a%20em%20estoque." target="_blank" rel="noopener">Consultar estoque</a>
-        </div>
+    <!-- ===== Catálogo de produtos ===== -->
+    <section class="section section-tint" id="catalogo">
+      <div class="wrap">
+        <header class="section-head catalog-head">
+          <div>
+            <h2>Catálogo de produtos</h2>
+            <p>Escolha o que precisa e mande a lista para a loja. A resposta vem pelo WhatsApp, com preço e disponibilidade.</p>
+          </div>
+        </header>
 
-        <!-- TODO: confirmar com a loja os produtos vendidos -->
-        <ul class="shop-list">
-          <li data-reveal>Antenas digitais e parabólicas</li>
-          <li data-reveal>Cabos, conectores e divisores</li>
-          <li data-reveal>Receptores e conversores</li>
-          <li data-reveal>Controles de portão</li>
-          <li data-reveal>Câmeras e acessórios</li>
-          <li data-reveal>Filtros contra interferência 5G</li>
-        </ul>
+        <div class="filters" role="toolbar" aria-label="Filtrar por categoria" id="filters"></div>
+
+        <!-- os produtos vêm de js/catalogo.js -->
+        <div class="products" id="products" aria-live="polite"></div>
       </div>
     </section>
+
+    <!-- Barra do orçamento: aparece quando há produtos escolhidos -->
+    <div class="quote-bar" id="quoteBar" hidden>
+      <button class="quote-open" id="quoteOpen" aria-expanded="false" aria-controls="quoteDrawer">
+        <span class="quote-count" id="quoteCount">0</span>
+        <span>Ver meu orçamento</span>
+      </button>
+      <a class="btn btn-primary quote-send" id="quoteSendBar" href="#" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+    </div>
+
+    <aside class="quote-drawer" id="quoteDrawer" aria-label="Meu orçamento" hidden>
+      <div class="quote-panel">
+        <header class="quote-head">
+          <h3>Meu orçamento</h3>
+          <button class="quote-close" id="quoteClose" aria-label="Fechar orçamento">×</button>
+        </header>
+        <ul class="quote-list" id="quoteList"></ul>
+        <label class="quote-note">
+          <span>Observação (opcional)</span>
+          <textarea id="quoteNote" rows="2" placeholder="Ex.: preciso para instalar no sábado"></textarea>
+        </label>
+        <footer class="quote-foot">
+          <button class="btn btn-outline" id="quoteClear">Limpar lista</button>
+          <a class="btn btn-primary" id="quoteSend" href="#" target="_blank" rel="noopener">Enviar orçamento no WhatsApp</a>
+        </footer>
+      </div>
+    </aside>
 
     <!-- ===== Como funciona (sequência real, por isso numerada) ===== -->
     <section class="section" id="como">
@@ -390,6 +469,7 @@
     <a href="tel:+551941223611" class="mb-call">Ligar</a>
   </div>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/catalogo.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

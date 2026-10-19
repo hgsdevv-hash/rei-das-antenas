@@ -73,7 +73,16 @@ function fluctuate() {
     i++;
   }, 1400);
 }
-setTimeout(tune, 300);
+// com a abertura tocando, o medidor só sintoniza depois que a tela se abre
+const introOn = document.documentElement.classList.contains("js-intro");
+setTimeout(tune, introOn ? 2900 : 300);
+
+// tira a abertura da página quando ela termina
+const intro = document.getElementById("intro");
+if (intro) {
+  if (!introOn) intro.remove();
+  else setTimeout(() => intro.remove(), 3500);
+}
 
 // ---------- Cards de serviço que abrem ----------
 document.querySelectorAll(".service").forEach((card) => {
