@@ -105,7 +105,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   transform: rotate(-18deg);
 }
 
-.nav-links { display: flex; gap: 1.6rem; margin-left: auto; }
+.nav-links { display: flex; align-items: center; gap: 1.6rem; margin-left: auto; }
 .nav-links a { text-decoration: none; font-weight: 500; opacity: .85; transition: opacity .2s; }
 .nav-links a:hover { opacity: 1; }
 .nav-phone {
@@ -588,6 +588,57 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .quote-foot { display: grid; gap: .6rem; padding: 1rem 1.4rem 1.4rem; border-top: 1px solid var(--line); }
 .quote-foot .btn { justify-content: center; }
 
+/* ---------- Acesso ao catálogo: botão do menu e faixa em destaque ---------- */
+.nav-links .nav-catalog {
+  padding: .45rem .95rem;
+  border-radius: 8px;
+  background: var(--red);
+  opacity: 1;
+  font-weight: 700;
+  transition: background .2s;
+}
+.nav-links .nav-catalog:hover, .nav-links .nav-catalog[aria-current="page"] { background: var(--red-600); }
+.btn-lg { padding: 1.1rem 1.8rem; font-size: 1.1rem; }
+
+.catalog-cta { background: var(--blue); color: var(--white); }
+.catalog-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2.2rem 0; }
+.catalog-cta h2 { color: var(--white); font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+.catalog-cta p { margin-top: .4rem; max-width: 52ch; color: rgba(255, 255, 255, .8); }
+.catalog-cta .btn { flex: none; }
+
+/* ---------- Página do catálogo ---------- */
+.breadcrumb { padding-top: 1.6rem; font-size: .9rem; color: var(--ink-2); }
+.breadcrumb a { color: var(--blue); text-underline-offset: 3px; }
+.catalog-page { padding-top: 1.4rem; }
+.catalog-page h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--navy); }
+.catalog-page .section-head p { max-width: 60ch; }
+
+.btn-whats { background: #1f9d55; color: var(--white); }
+.btn-whats:hover { background: #17834a; }
+.not-found { background: var(--navy); color: var(--white); }
+.not-found-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 3rem 0; }
+.not-found h2 { color: var(--white); font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+.not-found p { margin-top: .5rem; max-width: 54ch; color: rgba(255, 255, 255, .78); }
+.not-found .btn { flex: none; }
+
+.whats-float {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 75;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #1f9d55;
+  color: var(--white);
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .45);
+  transition: transform .2s var(--ease), bottom .3s var(--ease);
+}
+.whats-float:hover { transform: scale(1.06); }
+.whats-float svg { width: 30px; height: 30px; fill: currentColor; }
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 980px) {
   .hero-grid, .shop, .contact-grid, .reviews-grid { grid-template-columns: 1fr; }
@@ -614,8 +665,15 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .products { grid-template-columns: 1fr 1fr; gap: .7rem; }
   .product-body { padding: .8rem; }
   .product p { display: none; }
-  .quote-bar { bottom: 76px; width: calc(100% - 1.5rem); justify-content: space-between; }
+  .quote-bar { bottom: .9rem; width: calc(100% - 1.5rem); justify-content: space-between; }
   .quote-send { display: none; }
+  .has-quote .whats-float { bottom: 6rem; }
+  /* filtros numa fileira só, deslizando para o lado */
+  .filters { flex-wrap: nowrap; overflow-x: auto; margin-inline: -1.25rem; padding: 0 1.25rem .4rem; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters button { flex: none; }
+  .catalog-cta-inner, .not-found-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  .catalog-cta .btn, .not-found .btn { width: 100%; justify-content: center; }
   .steps { grid-template-columns: 1fr; gap: 1.5rem; }
   .steps li { padding: 0 0 0 4rem; }
   .steps li::after { display: none; }
@@ -627,7 +685,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
     inset: auto 0 0;
     z-index: 60;
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1fr 1fr .8fr;
     gap: .5rem;
     padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom));
     background: var(--white);
@@ -636,6 +694,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .mobile-bar a { padding: .85rem; border-radius: 10px; text-align: center; font-weight: 700; text-decoration: none; }
   .mb-wa { background: var(--red); color: var(--white); }
   .mb-call { background: var(--paper); color: var(--navy); }
+  .mb-cat { background: var(--blue); color: var(--white); }
 }
 
 @media (prefers-reduced-motion: reduce) {

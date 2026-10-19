@@ -6,6 +6,9 @@
 // e preencha o campo img, por exemplo: img: "assets/img/produtos/antena-interna.jpg"
 // =========================================================
 
+(() => {
+// tudo dentro deste bloco fica isolado do resto do site
+
 // TODO: substituir pelos produtos do catálogo da página do Facebook da loja
 const PRODUTOS = [
   { id: "antena-externa",   cat: "antenas",    nome: "Antena digital externa",          desc: "Modelo espinha de peixe, para telhado ou mastro." },
@@ -85,7 +88,7 @@ filtrosEl.addEventListener("click", (e) => {
 // ---------- Cards de produto ----------
 function acaoHTML(p) {
   const q = escolhidos[p.id] || 0;
-  if (!q) return `<button type="button" class="add-btn" data-add="${p.id}">Adicionar ao orçamento</button>`;
+  if (!q) return `<button type="button" class="add-btn" data-add="${p.id}" aria-label="Adicionar ${p.nome} ao orçamento">Adicionar</button>`;
   return `<div class="stepper" role="group" aria-label="Quantidade de ${p.nome}">
       <button type="button" data-menos="${p.id}" aria-label="Diminuir">−</button>
       <output>${q}</output>
@@ -166,6 +169,7 @@ function linkWhats() {
 function atualizarOrcamento(animar) {
   const total = Object.values(escolhidos).reduce((a, b) => a + b, 0);
   barra.hidden = total === 0;
+  document.body.classList.toggle("has-quote", total > 0);
   const cont = $("quoteCount");
   cont.textContent = total;
   if (animar) { cont.classList.remove("bump"); void cont.offsetWidth; cont.classList.add("bump"); }
@@ -210,7 +214,20 @@ $("quoteClear").addEventListener("click", () => {
   atualizarOrcamento(false);
 });
 
+// ---------- Menu do celular e rodapé (esta página não usa o main.js) ----------
+const menuBtn = $("menuBtn");
+const menuMobile = $("menuMobile");
+if (menuBtn && menuMobile) {
+  menuBtn.addEventListener("click", () => {
+    const open = menuBtn.getAttribute("aria-expanded") === "true";
+    menuBtn.setAttribute("aria-expanded", String(!open));
+    menuMobile.classList.toggle("open", !open);
+  });
+}
+if ($("year")) $("year").textContent = new Date().getFullYear();
+
 // ---------- Início ----------
 renderFiltros();
 renderProdutos();
 atualizarOrcamento(false);
+})();

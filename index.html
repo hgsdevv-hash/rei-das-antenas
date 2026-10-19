@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
   <script>
     (function () {
@@ -116,7 +116,7 @@
 
       <nav class="nav-links" aria-label="Seções">
         <a href="#servicos">Serviços</a>
-        <a href="#catalogo">Catálogo</a>
+        <a href="catalogo.html" class="nav-catalog">Catálogo</a>
         <a href="#como">Como funciona</a>
         <a href="#contato">Contato</a>
       </nav>
@@ -130,7 +130,7 @@
 
     <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
       <a href="#servicos">Serviços</a>
-      <a href="#catalogo">Catálogo</a>
+      <a href="catalogo.html" class="nav-catalog">Catálogo</a>
       <a href="#como">Como funciona</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -194,6 +194,18 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== Chamada para o catálogo (página própria) ===== -->
+    <section class="catalog-cta" aria-label="Catálogo de produtos">
+      <div class="wrap catalog-cta-inner">
+        <div class="catalog-cta-text">
+          <h2>Catálogo de produtos</h2>
+          <p>Antenas, cabos, controles, câmeras e mais. Escolha o que precisa e receba o orçamento pelo WhatsApp.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" href="catalogo.html">Abrir o catálogo</a>
+      </div>
+    </section>
+
 
     <!-- ===== Serviços (cards interativos) ===== -->
     <section class="section" id="servicos">
@@ -296,49 +308,6 @@
       </div>
     </section>
 
-    <!-- ===== Catálogo de produtos ===== -->
-    <section class="section section-tint" id="catalogo">
-      <div class="wrap">
-        <header class="section-head catalog-head">
-          <div>
-            <h2>Catálogo de produtos</h2>
-            <p>Escolha o que precisa e mande a lista para a loja. A resposta vem pelo WhatsApp, com preço e disponibilidade.</p>
-          </div>
-        </header>
-
-        <div class="filters" role="toolbar" aria-label="Filtrar por categoria" id="filters"></div>
-
-        <!-- os produtos vêm de js/catalogo.js -->
-        <div class="products" id="products" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- Barra do orçamento: aparece quando há produtos escolhidos -->
-    <div class="quote-bar" id="quoteBar" hidden>
-      <button class="quote-open" id="quoteOpen" aria-expanded="false" aria-controls="quoteDrawer">
-        <span class="quote-count" id="quoteCount">0</span>
-        <span>Ver meu orçamento</span>
-      </button>
-      <a class="btn btn-primary quote-send" id="quoteSendBar" href="#" target="_blank" rel="noopener">Enviar no WhatsApp</a>
-    </div>
-
-    <aside class="quote-drawer" id="quoteDrawer" aria-label="Meu orçamento" hidden>
-      <div class="quote-panel">
-        <header class="quote-head">
-          <h3>Meu orçamento</h3>
-          <button class="quote-close" id="quoteClose" aria-label="Fechar orçamento">×</button>
-        </header>
-        <ul class="quote-list" id="quoteList"></ul>
-        <label class="quote-note">
-          <span>Observação (opcional)</span>
-          <textarea id="quoteNote" rows="2" placeholder="Ex.: preciso para instalar no sábado"></textarea>
-        </label>
-        <footer class="quote-foot">
-          <button class="btn btn-outline" id="quoteClear">Limpar lista</button>
-          <a class="btn btn-primary" id="quoteSend" href="#" target="_blank" rel="noopener">Enviar orçamento no WhatsApp</a>
-        </footer>
-      </div>
-    </aside>
 
     <!-- ===== Como funciona (sequência real, por isso numerada) ===== -->
     <section class="section" id="como">
@@ -465,11 +434,11 @@
 
   <!-- Barra fixa no celular -->
   <div class="mobile-bar">
+    <a href="catalogo.html" class="mb-cat">Catálogo</a>
     <a href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="mb-wa">WhatsApp</a>
     <a href="tel:+551941223611" class="mb-call">Ligar</a>
   </div>
 
-  <script src="js/catalogo.js?v=4"></script>
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>
