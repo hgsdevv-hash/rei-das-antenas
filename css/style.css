@@ -106,7 +106,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 }
 
 .nav-links { display: flex; align-items: center; gap: 1.6rem; margin-left: auto; }
-.nav-links a { text-decoration: none; font-weight: 500; opacity: .85; transition: opacity .2s; }
+.nav-links a { text-decoration: none; font-weight: 500; white-space: nowrap; opacity: .85; transition: opacity .2s; }
 .nav-links a:hover { opacity: 1; }
 .nav-phone {
   text-decoration: none;
@@ -537,7 +537,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .cat-info { color: var(--ink-2); }
 .cat-info strong { color: var(--navy); }
 .cat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
-.cat-controls label { display: flex; align-items: center; gap: .45rem; font-size: .92rem; color: var(--ink-2); }
+.cat-controls label { display: flex; align-items: center; gap: .45rem; font-size: .92rem; color: var(--ink-2); white-space: nowrap; }
 .cat-controls select {
   min-height: 40px;
   padding: .4rem 2rem .4rem .7rem;
@@ -755,20 +755,32 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .reels-arrow { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--white); color: var(--navy); font-size: 1.5rem; line-height: 1; cursor: pointer; transition: background .2s, color .2s; }
 .reels-arrow:hover { background: var(--navy); color: var(--white); }
 
-/* faixa que desliza para o lado, com setas; mostra 4 vídeos e um pedaço do próximo */
+/* faixa que desliza para o lado: só vídeos inteiros (4 no computador, 3 no tablet, 2 no celular);
+   o resto aparece pelas setas, arrastando com o mouse ou deslizando o dedo */
 .reels {
+  --por-vez: 4;
   list-style: none;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 4rem) / 4.3);
+  grid-auto-columns: calc((100% - (var(--por-vez) - 1) * 1rem) / var(--por-vez));
   gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding: 6px 0 .4rem;   /* espaço para o card subir no hover sem ser cortado */
+  cursor: grab;
 }
 .reels::-webkit-scrollbar { display: none; }
+.reels.arrastando { cursor: grabbing; scroll-snap-type: none; }
+.reels.arrastando .reel-btn { pointer-events: none; }
 .reel { scroll-snap-align: start; }
+.reels-arrow:disabled { opacity: .35; cursor: default; }
+.reels-arrow:disabled:hover { background: var(--white); color: var(--navy); }
+.reels-dots { display: flex; justify-content: center; gap: .3rem; margin-top: 1rem; }
+.reels-dots:empty { display: none; }
+.reels-dots button { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+.reels-dots button::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--line); transition: width .3s var(--ease), background .3s; }
+.reels-dots button[aria-current="true"]::before { width: 26px; background: var(--navy); }
 .reel-btn {
   position: relative;
   display: block;
@@ -811,20 +823,30 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 980px) {
+  /* telefone sai do topo para os links caberem (ele continua no botão Ligar e no contato) */
+  .nav-phone { display: none; }
+  .nav-links { gap: 1.2rem; }
   .hero-grid, .shop, .contact-grid, .reviews-grid { grid-template-columns: 1fr; }
   .signal { order: -1; }
   .signal-art { width: 240px; }
   .services { grid-template-columns: 1fr 1fr; grid-template-areas: "feat feat" "a b" "c c"; }
 
   /* catálogo: filtros saem da lateral e abrem pelo botão "Filtros" */
-  .catalog-layout { grid-template-columns: 1fr; gap: 0; }
+  /* resultados viram itens soltos para o painel de filtros abrir logo abaixo da barra com o botão */
+  .catalog-layout { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .cat-results { display: contents; }
+  .cat-toolbar { order: 1; }
+  .cat-side { order: 2; }
+  .cat-chips { order: 3; }
+  .products, .cat-empty { order: 4; }
+  .pager { order: 5; }
   .cat-toggle { display: inline-flex; align-items: center; gap: .3rem; }
   .cat-side { position: static; display: none; max-height: none; overflow: visible; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
   .cat-side.open { display: grid; }
   .cat-side .cat-clear { grid-column: 1 / -1; }
 
-  /* vídeos encostam na borda da tela */
-  .reels { grid-auto-columns: 38%; margin-inline: -1.25rem; padding: 6px 1.25rem .4rem; scroll-padding-inline: 1.25rem; }
+  /* tablet: 3 vídeos por vez */
+  .reels { --por-vez: 3; }
 }
 
 @media (max-width: 760px) {
@@ -837,7 +859,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
     background: var(--navy);
     transition: max-height .35s var(--ease);
   }
-  .menu-mobile.open { max-height: 300px; }
+  .menu-mobile.open { max-height: 480px; }   /* folga para 5 links mesmo com letra grande no celular */
   .menu-mobile a { padding: 1rem 1.25rem; text-decoration: none; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, .08); }
 
   .services { grid-template-columns: 1fr; grid-template-areas: "feat" "a" "b" "c"; }
@@ -856,7 +878,14 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .cat-side { grid-template-columns: 1fr; }
   .catalog-cta-inner, .not-found-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
   .catalog-cta .btn, .not-found .btn { width: 100%; justify-content: center; }
-  .reels { grid-auto-columns: 68%; }
+  .reels { --por-vez: 2; }
+  /* cards estreitos (2 por vez): etiqueta, play e textos menores para não se encostarem */
+  .reel-tag { top: .55rem; left: .55rem; padding: .15rem .45rem; font-size: .7rem; }
+  .reel-play { top: .5rem; right: .5rem; width: 28px; height: 28px; }
+  .reel-play::before { border-width: 5px 0 5px 8px; }
+  .reel-info { left: .6rem; right: .6rem; bottom: .6rem; }
+  .reel-info strong { font-size: .88rem; }
+  .reel-info span { font-size: .75rem; }
   .reels-nav { display: none; }
   .steps { grid-template-columns: 1fr; gap: 1.5rem; }
   .steps li { padding: 0 0 0 4rem; }

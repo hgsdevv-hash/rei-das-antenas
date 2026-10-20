@@ -133,13 +133,98 @@ if (canHover) {
   reelVideos.forEach((v) => io.observe(v));
 }
 
-// setas da faixa (tablet)
-document.querySelectorAll(".reels-arrow").forEach((btn) =>
-  btn.addEventListener("click", () => {
-    const step = reelsList.querySelector(".reel").getBoundingClientRect().width + 16;
-    reelsList.scrollBy({ left: step * Number(btn.dataset.dir), behavior: "smooth" });
-  })
-);
+// ---------- Faixa deslizante: setas, bolinhas e arrastar com o mouse ----------
+const setas = [...document.querySelectorAll(".reels-arrow")];
+const dotsEl = document.getElementById("reelsDots");
+const reels = [...reelsList.querySelectorAll(".reel")];
+const suave = reduceMotion ? "auto" : "smooth";
+
+// quantos vídeos cabem inteiros e quantas "páginas" a faixa tem
+function medidas() {
+  const passo = reels[1].offsetLeft - reels[0].offsetLeft;   // largura do card + espaço
+  const porVez = Math.max(1, Math.round((reelsList.clientWidth + (passo - reels[0].offsetWidth)) / passo));
+  return { passo, porVez, paginas: Math.ceil(reels.length / porVez) };
+}
+
+function irPara(pagina) {
+  const { passo, porVez, paginas } = medidas();
+  const p = Math.min(Math.max(pagina, 0), paginas - 1);
+  reelsList.scrollTo({ left: p * porVez * passo, behavior: suave });
+}
+
+function paginaAtual() {
+  const { passo, porVez } = medidas();
+  const max = reelsList.scrollWidth - reelsList.clientWidth;
+  if (reelsList.scrollLeft >= max - 4) return Math.ceil(reels.length / porVez) - 1;   // fim da faixa
+  return Math.round(reelsList.scrollLeft / (passo * porVez));
+}
+
+function montarBolinhas() {
+  const { paginas } = medidas();
+  dotsEl.innerHTML = paginas > 1
+    ? Array.from({ length: paginas }, (_, i) => `<button type="button" data-pag="${i}" aria-label="Vídeos, parte ${i + 1} de ${paginas}"></button>`).join("")
+    : "";
+  atualizarFaixa();
+}
+
+function atualizarFaixa() {
+  const atual = paginaAtual();
+  const max = reelsList.scrollWidth - reelsList.clientWidth;
+  setas[0].disabled = reelsList.scrollLeft <= 4;
+  setas[1].disabled = reelsList.scrollLeft >= max - 4;
+  dotsEl.querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-current", String(i === atual)));
+}
+
+setas.forEach((btn) => btn.addEventListener("click", () => irPara(paginaAtual() + Number(btn.dataset.dir))));
+dotsEl.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-pag]");
+  if (b) irPara(Number(b.dataset.pag));
+});
+
+let rolagem;
+reelsList.addEventListener("scroll", () => {
+  cancelAnimationFrame(rolagem);
+  rolagem = requestAnimationFrame(atualizarFaixa);
+}, { passive: true });
+
+let medidaTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(medidaTimer);
+  medidaTimer = setTimeout(montarBolinhas, 150);
+});
+montarBolinhas();
+
+// computador: arrastar a faixa com o mouse (no celular o dedo já desliza sozinho)
+let arraste = null;
+reelsList.addEventListener("pointerdown", (e) => {
+  if (e.pointerType !== "mouse" || e.button !== 0) return;
+  arraste = { x: e.clientX, inicio: reelsList.scrollLeft, moveu: false };
+});
+window.addEventListener("pointermove", (e) => {
+  if (!arraste) return;
+  const dx = e.clientX - arraste.x;
+  if (!arraste.moveu && Math.abs(dx) < 6) return;   // abaixo disso é clique, não arraste
+  arraste.moveu = true;
+  reelsList.classList.add("arrastando");
+  reelsList.scrollLeft = arraste.inicio - dx;
+});
+window.addEventListener("pointerup", () => {
+  if (!arraste) return;
+  const moveu = arraste.moveu;
+  arraste = null;
+  if (!moveu) return;
+  reelsList.classList.remove("arrastando");
+  // encaixa no vídeo mais próximo e não deixa o arraste virar clique
+  const { passo } = medidas();
+  reelsList.scrollTo({ left: Math.round(reelsList.scrollLeft / passo) * passo, behavior: suave });
+  ignorarClique = true;
+  setTimeout(() => { ignorarClique = false; }, 0);
+});
+let ignorarClique = false;
+reelsList.addEventListener("click", (e) => {
+  if (ignorarClique) { e.stopPropagation(); e.preventDefault(); }
+}, true);
+reelsList.addEventListener("dragstart", (e) => e.preventDefault());   // impede arrastar a imagem/vídeo
 
 // player em tela cheia
 const player = document.getElementById("player");
@@ -168,8 +253,9 @@ revealEls.forEach((el) => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
-    entry.target.classList.add("visible");
-    observer.unobserve(entry.target);
+    // na faixa de vídeos, os cards fora da tela aparecem junto, senão chegariam em branco ao deslizar
+    const grupo = entry.target.closest("#reels") ? reels : [entry.target];
+    grupo.forEach((el) => { el.classList.add("visible"); observer.unobserve(el); });
   });
 }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
 

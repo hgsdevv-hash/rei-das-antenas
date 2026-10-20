@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=12">
   <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
   <script>
     (function () {
@@ -318,9 +318,9 @@
             <h2>Veja a equipe em ação</h2>
             <p>Toque em um vídeo para assistir em tela cheia.</p>
           </div>
-          <div class="reels-nav" aria-hidden="true">
-            <button class="reels-arrow" type="button" data-dir="-1" tabindex="-1">‹</button>
-            <button class="reels-arrow" type="button" data-dir="1" tabindex="-1">›</button>
+          <div class="reels-nav">
+            <button class="reels-arrow" type="button" data-dir="-1" aria-label="Vídeos anteriores" aria-controls="reels">‹</button>
+            <button class="reels-arrow" type="button" data-dir="1" aria-label="Próximos vídeos" aria-controls="reels">›</button>
           </div>
         </header>
 
@@ -390,6 +390,8 @@
             </button>
           </li>
         </ul>
+        <!-- uma bolinha por "página" de vídeos; criadas em js/main.js -->
+        <div class="reels-dots" id="reelsDots" role="group" aria-label="Páginas de vídeos"></div>
       </div>
     </section>
 
@@ -529,6 +531,6 @@
     <a href="tel:+551941223611" class="mb-call">Ligar</a>
   </div>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=12"></script>
 </body>
 </html>
