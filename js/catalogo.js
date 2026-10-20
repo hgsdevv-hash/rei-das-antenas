@@ -14,7 +14,7 @@
 // tags: palavras extras que a busca também encontra
 const PRODUTOS = [
   // antenas
-  { id: "antena-externa",    cat: "antenas", nome: "Antena digital externa",                  desc: "Modelo espinha de peixe, para telhado ou mastro.", img: "assets/img/produtos/antena-externa.jpg", tags: "hdtv uhf" },
+  { id: "antena-externa",    cat: "antenas", nome: "Antena digital externa",                  desc: "Para telhado ou mastro, com suporte de fixação.", img: "assets/img/produtos/antena-externa.jpg", tags: "hdtv uhf" },
   { id: "antena-interna",    cat: "antenas", nome: "Antena digital interna",                  desc: "Compacta, para regiões com sinal forte.", img: "assets/img/produtos/antena-interna.jpg", tags: "hdtv" },
   { id: "antena-oberon-5m",  cat: "antenas", marca: "Oberon",  nome: "Antena digital HDTV Oberon OR-MI802", desc: "Com 5 m de cabo, pronta para ligar na TV.", img: "assets/img/produtos/antena-oberon-5m.jpg", tags: "hdtv" },
   { id: "antena-flex-5m",    cat: "antenas", marca: "Flex",    nome: "Antena digital HDTV Flex FX-ANT-6",   desc: "Pronta para ligar na TV. Confirme o tamanho do cabo na loja.", img: "assets/img/produtos/antena-flex-5m.jpg", tags: "hdtv" },
