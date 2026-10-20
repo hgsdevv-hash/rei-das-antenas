@@ -11,23 +11,23 @@
 
 // TODO: substituir pelos produtos do catálogo da página do Facebook da loja
 const PRODUTOS = [
-  { id: "antena-externa",   cat: "antenas",    nome: "Antena digital externa",          desc: "Modelo espinha de peixe, para telhado ou mastro." },
-  { id: "antena-interna",   cat: "antenas",    nome: "Antena digital interna",          desc: "Compacta, para regiões com sinal forte." },
-  { id: "kit-parabolica",   cat: "antenas",    nome: "Kit antena parabólica",           desc: "Antena, LNB e suporte para TV via satélite." },
+  { id: "antena-externa",   cat: "antenas",    nome: "Antena digital externa",          desc: "Modelo espinha de peixe, para telhado ou mastro.", img: "assets/img/produtos/antena-externa.jpg" },
+  { id: "antena-interna",   cat: "antenas",    nome: "Antena digital interna",          desc: "Compacta, para regiões com sinal forte.", img: "assets/img/produtos/antena-interna.jpg" },
+  { id: "kit-parabolica",   cat: "antenas",    nome: "Kit antena parabólica",           desc: "Antena, LNB e suporte para TV via satélite.", img: "assets/img/produtos/kit-parabolica.jpg" },
   { id: "mastro",           cat: "antenas",    nome: "Mastro e suporte de antena",      desc: "Para fixação no telhado, na parede ou na laje." },
-  { id: "cabo-coaxial",     cat: "cabos",      nome: "Cabo coaxial (metro)",            desc: "Para antena digital, parabólica e câmeras." },
-  { id: "conector-f",       cat: "cabos",      nome: "Conector F",                      desc: "Encaixe de rosca para cabo coaxial." },
-  { id: "divisor",          cat: "cabos",      nome: "Divisor de sinal",                desc: "Leva o sinal de uma antena para mais de uma TV." },
+  { id: "cabo-coaxial",     cat: "cabos",      nome: "Cabo coaxial (metro)",            desc: "Para antena digital, parabólica e câmeras.", img: "assets/img/produtos/cabo-coaxial.jpg" },
+  { id: "conector-f",       cat: "cabos",      nome: "Conector F",                      desc: "Encaixe de rosca para cabo coaxial.", img: "assets/img/produtos/conector-f.jpg" },
+  { id: "divisor",          cat: "cabos",      nome: "Divisor de sinal",                desc: "Leva o sinal de uma antena para mais de uma TV.", img: "assets/img/produtos/divisor.jpg" },
   { id: "amplificador",     cat: "cabos",      nome: "Amplificador de sinal",           desc: "Reforça o sinal em casas com várias TVs." },
   { id: "filtro-5g",        cat: "receptores", nome: "Filtro contra interferência 5G",  desc: "Resolve canais que somem por causa do sinal 5G." },
-  { id: "conversor",        cat: "receptores", nome: "Conversor digital",               desc: "Para TVs antigas receberem o sinal digital." },
+  { id: "conversor",        cat: "receptores", nome: "Conversor digital",               desc: "Para TVs antigas receberem o sinal digital.", img: "assets/img/produtos/conversor.jpg" },
   { id: "receptor-parab",   cat: "receptores", nome: "Receptor de parabólica",          desc: "Receptor digital para antena parabólica." },
-  { id: "controle-portao",  cat: "portoes",    nome: "Controle remoto de portão",       desc: "Controles novos e cópias, sob consulta do modelo." },
-  { id: "camera",           cat: "cameras",    nome: "Câmera de segurança",             desc: "Para áreas internas e externas." },
+  { id: "controle-portao",  cat: "portoes",    nome: "Controle remoto de portão",       desc: "Controles novos e cópias, sob consulta do modelo.", img: "assets/img/produtos/controle-portao.png" },
+  { id: "camera",           cat: "cameras",    nome: "Câmera de segurança",             desc: "Para áreas internas e externas.", img: "assets/img/produtos/camera.jpg" },
   { id: "gravador",         cat: "cameras",    nome: "Gravador de câmeras (DVR)",       desc: "Grava as imagens e permite ver pelo celular." },
-  { id: "fonte-camera",     cat: "cameras",    nome: "Fonte para câmera",               desc: "Alimentação para câmeras de segurança." },
+  { id: "fonte-camera",     cat: "cameras",    nome: "Fonte para câmera",               desc: "Alimentação para câmeras de segurança.", img: "assets/img/produtos/fonte-camera.jpg" },
   { id: "suporte-tv",       cat: "acessorios", nome: "Suporte de TV",                   desc: "Fixo ou articulado, para vários tamanhos." },
-  { id: "controle-tv",      cat: "acessorios", nome: "Controle remoto universal",       desc: "Funciona com a maioria das marcas de TV." },
+  { id: "controle-tv",      cat: "acessorios", nome: "Controle remoto universal",       desc: "Funciona com a maioria das marcas de TV.", img: "assets/img/produtos/controle-tv.jpg" },
 ];
 
 const CATEGORIAS = {
@@ -101,7 +101,9 @@ function cardHTML(p, n) {
     ? `<img src="${p.img}" alt="${p.nome}" loading="lazy">`
     : `<svg viewBox="0 0 48 48" aria-hidden="true">${ICONES[p.cat] || ""}</svg>`;
   return `<article class="product ${escolhidos[p.id] ? "picked" : ""}" data-id="${p.id}" style="--n:${n}">
-      <div class="product-img">${img}</div>
+      <div class="product-img">${img}<span class="glare" aria-hidden="true"></span>
+        <span class="picked-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>${escolhidos[p.id] || ""}</b></span>
+      </div>
       <div class="product-body">
         <span class="product-cat">${CATEGORIAS[p.cat] || ""}</span>
         <h3>${p.nome}</h3>
@@ -122,6 +124,7 @@ function atualizarCard(id) {
   const p = PRODUTOS.find((x) => x.id === id);
   if (!card || !p) return;
   card.classList.toggle("picked", !!escolhidos[id]);
+  card.querySelector(".picked-badge b").textContent = escolhidos[id] || "";
   card.querySelector(".product-action").innerHTML = acaoHTML(p);
   const out = card.querySelector("output");
   if (out) out.classList.add("bump");
@@ -140,6 +143,7 @@ document.addEventListener("click", (e) => {
   const add = e.target.closest("[data-add]");
   const mais = e.target.closest("[data-mais]");
   const menos = e.target.closest("[data-menos]");
+  if (add || mais) voar(e.target.closest(".product") || null);
   if (add) {
     mudarQtd(add.dataset.add, 1);
     // mantém o foco no controle novo, para quem usa teclado
@@ -148,6 +152,57 @@ document.addEventListener("click", (e) => {
   if (mais) mudarQtd(mais.dataset.mais, 1);
   if (menos) mudarQtd(menos.dataset.menos, -1);
 });
+
+// ---------- Interações dos cards ----------
+const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const mouseFino = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+// inclinação 3D que segue o mouse, com um brilho por cima da foto
+if (mouseFino && !semMovimento) {
+  produtosEl.addEventListener("pointermove", (e) => {
+    const card = e.target.closest(".product");
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;   // 0 a 1
+    const y = (e.clientY - r.top) / r.height;
+    card.style.setProperty("--rx", `${(0.5 - y) * 8}deg`);
+    card.style.setProperty("--ry", `${(x - 0.5) * 10}deg`);
+    card.style.setProperty("--gx", `${x * 100}%`);
+    card.style.setProperty("--gy", `${y * 100}%`);
+    card.classList.add("tilting");
+  });
+  produtosEl.addEventListener("pointerout", (e) => {
+    const card = e.target.closest(".product");
+    if (card && !card.contains(e.relatedTarget)) {
+      card.classList.remove("tilting");
+      card.style.removeProperty("--rx");
+      card.style.removeProperty("--ry");
+    }
+  });
+}
+
+// ao adicionar, uma bolinha "voa" do card até a barra do orçamento
+function voar(card) {
+  if (!card || semMovimento) return;
+  const de = card.querySelector(".product-img").getBoundingClientRect();
+  const alvo = barra.hidden ? null : $("quoteCount").getBoundingClientRect();
+  const dot = document.createElement("span");
+  dot.className = "fly-dot";
+  dot.style.left = `${de.left + de.width / 2}px`;
+  dot.style.top = `${de.top + de.height / 2}px`;
+  document.body.appendChild(dot);
+  // se a barra ainda não apareceu, mira no meio da parte de baixo da tela
+  const tx = (alvo ? alvo.left + alvo.width / 2 : innerWidth / 2) - (de.left + de.width / 2);
+  const ty = (alvo ? alvo.top + alvo.height / 2 : innerHeight - 40) - (de.top + de.height / 2);
+  dot.animate(
+    [
+      { transform: "translate(-50%, -50%) scale(1)", opacity: 1 },
+      { transform: `translate(calc(-50% + ${tx * 0.5}px), calc(-50% + ${ty * 0.5 - 80}px)) scale(1.2)`, opacity: 1, offset: 0.5 },
+      { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(.4)`, opacity: 0.2 },
+    ],
+    { duration: 650, easing: "cubic-bezier(.5,0,.3,1)" }
+  ).onfinish = () => dot.remove();
+}
 
 // ---------- Mensagem do WhatsApp ----------
 function mensagem() {
