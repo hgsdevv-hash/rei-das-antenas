@@ -101,6 +101,63 @@ document.querySelectorAll(".service-cta").forEach((link) => {
   link.rel = "noopener";
 });
 
+// ---------- Trabalhos: vídeos curtos nos cards, completos ao tocar (todos sem som) ----------
+const reelsList = document.getElementById("reels");
+const reelVideos = [...reelsList.querySelectorAll("video")];
+const canHover = window.matchMedia("(hover: hover)").matches;
+
+// barrinha de progresso de cada vídeo
+reelVideos.forEach((video) => {
+  const bar = document.createElement("span");
+  bar.className = "reel-progress";
+  video.parentElement.appendChild(bar);
+  video.addEventListener("timeupdate", () => bar.style.setProperty("--p", video.duration ? video.currentTime / video.duration : 0));
+});
+
+const play = (v) => { if (!reduceMotion) v.play().catch(() => {}); };
+
+if (canHover) {
+  // computador: o vídeo de destaque roda ao aparecer, os outros quando o mouse passa
+  const feature = reelsList.querySelector(".reel-feature video");
+  new IntersectionObserver(([entry]) => (entry.isIntersecting ? play(feature) : feature.pause()), { threshold: 0.5 }).observe(feature);
+  reelVideos.filter((v) => v !== feature).forEach((video) => {
+    const btn = video.parentElement;
+    btn.addEventListener("mouseenter", () => play(video));
+    btn.addEventListener("mouseleave", () => video.pause());
+  });
+} else {
+  // celular: roda só o vídeo que está bem visível na faixa, para poupar dados
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => (entry.intersectionRatio > 0.75 ? play(entry.target) : entry.target.pause()));
+  }, { threshold: [0, 0.75, 1] });
+  reelVideos.forEach((v) => io.observe(v));
+}
+
+// setas da faixa (tablet)
+document.querySelectorAll(".reels-arrow").forEach((btn) =>
+  btn.addEventListener("click", () => {
+    const step = reelsList.querySelector(".reel").getBoundingClientRect().width + 16;
+    reelsList.scrollBy({ left: step * Number(btn.dataset.dir), behavior: "smooth" });
+  })
+);
+
+// player em tela cheia
+const player = document.getElementById("player");
+const playerVideo = document.getElementById("playerVideo");
+reelsList.querySelectorAll(".reel-btn").forEach((btn) =>
+  btn.addEventListener("click", () => {
+    reelVideos.forEach((v) => v.pause());
+    playerVideo.src = btn.dataset.src;
+    player.classList.toggle("wide", btn.hasAttribute("data-wide"));   // vídeo deitado
+    player.setAttribute("aria-label", btn.dataset.title);
+    player.showModal();
+    playerVideo.play().catch(() => {});
+  })
+);
+document.getElementById("playerClose").addEventListener("click", () => player.close());
+player.addEventListener("click", (e) => { if (e.target === player) player.close(); });   // clique fora do vídeo
+player.addEventListener("close", () => { playerVideo.pause(); playerVideo.removeAttribute("src"); playerVideo.load(); });
+
 // ---------- Entrada em cascata ao rolar ----------
 const revealEls = document.querySelectorAll("[data-reveal]");
 revealEls.forEach((el) => {

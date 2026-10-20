@@ -40,7 +40,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=9">
   <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
   <script>
     (function () {
@@ -116,6 +116,7 @@
 
       <nav class="nav-links" aria-label="Seções">
         <a href="#servicos">Serviços</a>
+        <a href="#trabalhos">Trabalhos</a>
         <a href="catalogo.html" class="nav-catalog">Catálogo</a>
         <a href="#como">Como funciona</a>
         <a href="#contato">Contato</a>
@@ -130,6 +131,7 @@
 
     <nav class="menu-mobile" id="menuMobile" aria-label="Menu">
       <a href="#servicos">Serviços</a>
+      <a href="#trabalhos">Trabalhos</a>
       <a href="catalogo.html" class="nav-catalog">Catálogo</a>
       <a href="#como">Como funciona</a>
       <a href="#contato">Contato</a>
@@ -308,6 +310,94 @@
       </div>
     </section>
 
+    <!-- ===== Trabalhos: vídeos da equipe (sem som) ===== -->
+    <section class="section section-tint" id="trabalhos">
+      <div class="wrap">
+        <header class="section-head reels-head">
+          <div>
+            <h2>Veja a equipe em ação</h2>
+            <p>Toque em um vídeo para assistir em tela cheia.</p>
+          </div>
+          <div class="reels-nav" aria-hidden="true">
+            <button class="reels-arrow" type="button" data-dir="-1" tabindex="-1">‹</button>
+            <button class="reels-arrow" type="button" data-dir="1" tabindex="-1">›</button>
+          </div>
+        </header>
+
+        <ul class="reels" id="reels">
+          <li class="reel reel-feature" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-parabolica.mp4" data-title="Apontando antena parabólica">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-parabolica.jpg" src="assets/video/ra-parabolica-preview.mp4"></video>
+              <span class="reel-tag">Parabólica</span>
+              <span class="reel-info"><strong>Parabólica no ponto certo</strong><span>Ajuste fino do sinal no telhado</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-canais-tv.mp4" data-title="Canais digitais sintonizados">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-canais-tv.jpg" src="assets/video/ra-canais-tv-preview.mp4"></video>
+              <span class="reel-tag">Antena digital</span>
+              <span class="reel-info"><strong>Todos os canais na TV</strong><span>Sintonia conferida com o cliente</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-instalacao-tv.mp4" data-title="Instalação na casa do cliente">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-instalacao-tv.jpg" src="assets/video/ra-instalacao-tv-preview.mp4"></video>
+              <span class="reel-tag">Instalação</span>
+              <span class="reel-info"><strong>Cabo novo até a TV</strong><span>Serviço limpo e organizado</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-portao-basculante.mp4" data-title="Portão basculante automatizado" data-wide>
+              <video muted loop playsinline preload="none" poster="assets/video/ra-portao-basculante.jpg" src="assets/video/ra-portao-basculante-preview.mp4"></video>
+              <span class="reel-tag">Portões</span>
+              <span class="reel-info"><strong>Portão basculante</strong><span>Abrindo e fechando pelo controle</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-motor-portao.mp4" data-title="Instalação de motor de portão">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-motor-portao.jpg" src="assets/video/ra-motor-portao-preview.mp4"></video>
+              <span class="reel-tag">Portões</span>
+              <span class="reel-info"><strong>Motor de portão</strong><span>Trilho e motor no lugar</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-porteiro.mp4" data-title="Porteiro eletrônico com fechadura">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-porteiro.jpg" src="assets/video/ra-porteiro-preview.mp4"></video>
+              <span class="reel-tag">Porteiro</span>
+              <span class="reel-info"><strong>Porteiro com fechadura</strong><span>Portão abre pelo interfone</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-controle-portao.mp4" data-title="Controle de portão funcionando">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-controle-portao.jpg" src="assets/video/ra-controle-portao-preview.mp4"></video>
+              <span class="reel-tag">Controles</span>
+              <span class="reel-info"><strong>Controle configurado</strong><span>Testado na hora</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+          <li class="reel" data-reveal>
+            <button class="reel-btn" type="button" data-src="assets/video/ra-carro-equipe.mp4" data-title="Equipe saindo para atendimento">
+              <video muted loop playsinline preload="none" poster="assets/video/ra-carro-equipe.jpg" src="assets/video/ra-carro-equipe-preview.mp4"></video>
+              <span class="reel-tag">Equipe</span>
+              <span class="reel-info"><strong>A caminho do cliente</strong><span>Carro equipado com escada</span></span>
+              <span class="reel-play" aria-hidden="true"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Player em tela cheia (os vídeos não têm som) -->
+    <dialog class="player" id="player" aria-label="Vídeo">
+      <button class="player-close" id="playerClose" type="button" aria-label="Fechar vídeo">×</button>
+      <video id="playerVideo" controls muted playsinline></video>
+    </dialog>
 
     <!-- ===== Como funciona (sequência real, por isso numerada) ===== -->
     <section class="section" id="como">
@@ -439,6 +529,6 @@
     <a href="tel:+551941223611" class="mb-call">Ligar</a>
   </div>
 
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
