@@ -198,12 +198,11 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .section-head p { margin-top: .6rem; color: var(--ink-2); }
 
 /* ---------- Serviços: cards interativos ---------- */
+/* 4 cards lado a lado e da mesma altura; ao abrir, só o card aberto cresce */
 .services {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1fr;
-  grid-template-areas:
-    "feat a b"
-    "feat c c";
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  grid-template-areas: "feat a b c";
   gap: 1rem;
   align-items: start;
 }
@@ -223,9 +222,12 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
 .service-toggle {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: .25rem;
   width: 100%;
+  min-height: 15.5rem;   /* mesma altura fechado, em todos os cards */
   padding: 1.6rem 3.5rem 1.6rem 1.6rem;
   border: 0;
   background: none;
@@ -256,15 +258,15 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 }
 .service:hover .service-icon, .service.open .service-icon { background: var(--blue); }
 .service:hover .service-icon svg, .service.open .service-icon svg { stroke: var(--white); }
-.service-title { font-size: 1.2rem; font-weight: 750; line-height: 1.25; color: var(--navy); }
+.service-title { margin-top: auto; font-size: 1.2rem; font-weight: 750; line-height: 1.25; color: var(--navy); }
 .service-sub { font-size: .95rem; color: var(--ink-2); }
 
 /* card de destaque: antenas são a especialidade */
 .service-feature { background: var(--blue); border-color: var(--blue); color: var(--white); }
-.service-feature .service-toggle { padding: 2.2rem 4rem 2rem 2rem; }
-.service-feature .service-icon { width: 76px; height: 76px; background: rgba(255, 255, 255, .12); }
-.service-feature .service-icon svg { width: 46px; height: 46px; stroke: var(--white); }
-.service-feature .service-title { font-size: clamp(1.5rem, 2.6vw, 2rem); font-style: italic; font-weight: 850; font-stretch: 110%; color: var(--white); }
+.service-feature .service-toggle { padding-right: 4rem; }
+.service-feature .service-icon { width: 64px; height: 64px; background: rgba(255, 255, 255, .12); }
+.service-feature .service-icon svg { width: 40px; height: 40px; stroke: var(--white); }
+.service-feature .service-title { font-size: clamp(1.35rem, 2vw, 1.65rem); font-style: italic; font-weight: 850; font-stretch: 110%; color: var(--white); }
 .service-feature .service-sub { color: rgba(255, 255, 255, .75); }
 .service-feature:hover { border-color: var(--navy); }
 .service-feature:hover .service-icon, .service-feature.open .service-icon { background: rgba(255, 255, 255, .2); }
@@ -284,10 +286,10 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .service-body ul { list-style: none; padding: 0 1.6rem; }
 .service-body li { position: relative; padding: .45rem 0 .45rem 1.3rem; border-top: 1px solid var(--line); font-size: .98rem; }
 .service-body li::before { content: ""; position: absolute; left: 0; top: 1.05rem; width: 7px; height: 7px; border-radius: 2px; background: var(--red); }
-.service-feature .service-body ul { padding: 0 2rem; }
+.service-feature .service-body ul { padding: 0 1.6rem; }
 .service-feature .service-body li { border-color: rgba(255, 255, 255, .18); }
 .service-cta { display: inline-block; margin: .8rem 1.6rem 1.6rem; font-weight: 700; color: var(--red); text-underline-offset: 4px; }
-.service-feature .service-cta { margin-inline: 2rem; color: var(--white); }
+.service-feature .service-cta { color: var(--white); }
 
 /* animações dos ícones no hover */
 .ic-wave { animation: none; }
@@ -885,7 +887,8 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .hero-grid, .shop, .contact-grid, .reviews-grid { grid-template-columns: 1fr; }
   .signal { order: -1; }
   .signal-art { width: 240px; }
-  .services { grid-template-columns: 1fr 1fr; grid-template-areas: "feat feat" "a b" "c c"; }
+  .services { grid-template-columns: 1fr 1fr; grid-template-areas: "feat a" "b c"; }
+  .service-toggle { min-height: 12rem; }
 
   /* catálogo: filtros saem da lateral e abrem pelo botão "Filtros" */
   /* resultados viram itens soltos para o painel de filtros abrir logo abaixo da barra com o botão */
@@ -919,6 +922,8 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .menu-mobile a { padding: 1rem 1.25rem; text-decoration: none; font-weight: 600; border-top: 1px solid rgba(255, 255, 255, .08); }
 
   .services { grid-template-columns: 1fr; grid-template-areas: "feat" "a" "b" "c"; }
+  .service-toggle { min-height: 0; }
+  .service-title { margin-top: .2rem; }
   .shop-list { grid-template-columns: 1fr; }
   .products { grid-template-columns: 1fr 1fr; gap: .7rem; }
   .product-body { padding: .8rem; }

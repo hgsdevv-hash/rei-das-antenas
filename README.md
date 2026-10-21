@@ -3,6 +3,11 @@
 Site de uma página para a loja Rei das Antenas, de Santa Bárbara d'Oeste (SP):
 instalação e manutenção de antenas, câmeras, portões e eletrônicos, e venda de peças.
 
+## Endereço
+
+https://oreidasantenas.com.br (domínio registrado na Hostinger, DNS apontando para o GitHub Pages; HTTPS obrigatório ligado).
+Canonical, Open Graph, dados da loja (JSON-LD), sitemap.xml e robots.txt usam esse endereço.
+
 ## Estrutura
 
 ```

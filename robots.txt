@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hgsdevv-hash.github.io/rei-das-antenas/sitemap.xml
+Sitemap: https://oreidasantenas.com.br/sitemap.xml
