@@ -49,3 +49,11 @@ Abra o `index.html` no navegador. Não precisa instalar nada.
 - Pedir à loja autorização para os depoimentos do Google exibidos no site
 - Trocar o botão "Avaliar a loja" pelo link curto oficial (Perfil da Empresa > Pedir avaliações)
 - Dono da loja: adicionar o endereço do site no Perfil da Empresa no Google
+
+## SEO (busca no Google)
+
+- `robots.txt` e `sitemap.xml` na raiz; canonical, Open Graph e favicon em todas as páginas
+- Imagem de compartilhamento: `assets/img/og.jpg` (1200×630)
+- `404.html` com caminhos absolutos (`/rei-das-antenas/...`) porque aparece em qualquer endereço errado
+- TODO: verificar o site no Google Search Console e colar a meta `google-site-verification` no `index.html`
+- TODO: enviar o sitemap no Search Console e adicionar o site no Perfil da Empresa no Google
