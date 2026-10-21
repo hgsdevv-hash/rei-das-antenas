@@ -26,7 +26,20 @@ rei-das-antenas/
 
 Abra o `index.html` no navegador. Não precisa instalar nada.
 
+## Privacidade e LGPD
+
+- `privacidade.html` (política, com a tabela de cookies em #cookies) e `termos.html`, ligadas no rodapé de todas as páginas
+- Sem cookies e sem rastreamento; só armazenamento local necessário (`rda-orcamento`, `rda-aviso`, `intro-vista`)
+- Fontes hospedadas no próprio site (`fonts/` + `css/fonts.css`), sem chamar o Google Fonts
+- Mapa do Google só carrega depois do clique em "Carregar o mapa"
+- Aviso de privacidade em `js/aviso.js` (some depois do "Entendi")
+- Ao incluir um serviço de terceiros (estatística, pixel, chat), atualize a política e troque o aviso por um pedido de consentimento
+
 ## Pendências (marcadas com TODO no código)
+
+- Dono da loja: ler e aprovar a política de privacidade e os termos, que estão em nome da loja
+- Informar razão social e CNPJ da loja para incluir no rodapé e na política
+- Autorização das pessoas que aparecem nos vídeos (equipe e clientes) e dos clientes cujas casas aparecem
 
 - Trocar a marca desenhada pela logo oficial em `assets/img/`
 - Confirmar com a loja a lista de serviços e produtos (modelos do catálogo vieram da distribuidora eDonato)

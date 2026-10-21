@@ -116,19 +116,34 @@ reelVideos.forEach((video) => {
 
 const play = (v) => { if (!reduceMotion) v.play().catch(() => {}); };
 
+// vídeo que começa sozinho para em 5 s (WCAG 2.2.2); no hover, quem decide é a pessoa
+const LIMITE_AUTO = 5;
+const playAuto = (v) => {
+  if (v.dataset.autoVisto) return;   // já tocou sozinho uma vez: fica parado na capa
+  v.dataset.auto = "1";
+  play(v);
+};
+reelVideos.forEach((v) => v.addEventListener("timeupdate", () => {
+  if (v.dataset.auto && v.currentTime >= LIMITE_AUTO) {
+    v.pause();
+    delete v.dataset.auto;
+    v.dataset.autoVisto = "1";
+  }
+}));
+
 if (canHover) {
   // computador: o vídeo de destaque roda ao aparecer, os outros quando o mouse passa
   const feature = reelsList.querySelector(".reel-feature video");
-  new IntersectionObserver(([entry]) => (entry.isIntersecting ? play(feature) : feature.pause()), { threshold: 0.5 }).observe(feature);
+  new IntersectionObserver(([entry]) => (entry.isIntersecting ? playAuto(feature) : feature.pause()), { threshold: 0.5 }).observe(feature);
   reelVideos.filter((v) => v !== feature).forEach((video) => {
     const btn = video.parentElement;
-    btn.addEventListener("mouseenter", () => play(video));
+    btn.addEventListener("mouseenter", () => { delete video.dataset.auto; play(video); });
     btn.addEventListener("mouseleave", () => video.pause());
   });
 } else {
   // celular: roda só o vídeo que está bem visível na faixa, para poupar dados
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => (entry.intersectionRatio > 0.75 ? play(entry.target) : entry.target.pause()));
+    entries.forEach((entry) => (entry.intersectionRatio > 0.75 ? playAuto(entry.target) : entry.target.pause()));
   }, { threshold: [0, 0.75, 1] });
   reelVideos.forEach((v) => io.observe(v));
 }
@@ -260,3 +275,14 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
 
 revealEls.forEach((el) => observer.observe(el));
+
+// ---------- Mapa: só carrega o Google Maps depois que a pessoa pede ----------
+const mapa = document.getElementById("mapa");
+document.getElementById("mapLoad")?.addEventListener("click", () => {
+  const frame = document.createElement("iframe");
+  frame.title = "Mapa da loja Rei das Antenas, na Rua XV de Novembro, 535";
+  frame.src = mapa.dataset.src;
+  frame.referrerPolicy = "no-referrer-when-downgrade";
+  mapa.replaceChildren(frame);
+  frame.focus();
+});

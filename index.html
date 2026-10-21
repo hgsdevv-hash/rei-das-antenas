@@ -37,10 +37,9 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=12">
+  <link rel="preload" href="fonts/archivo-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css?v=14">
   <!-- abertura: toca uma vez por visita, e nunca para quem prefere menos movimento -->
   <script>
     (function () {
@@ -55,6 +54,8 @@
   </script>
 </head>
 <body id="topo">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- ===== Abertura: a antena se monta como Lego e a tela se abre ===== -->
   <div class="intro" id="intro" aria-hidden="true">
@@ -138,7 +139,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
 
     <!-- ===== Hero ===== -->
     <section class="hero">
@@ -429,8 +430,8 @@
       <div class="wrap reviews-grid">
         <div class="reviews-score" data-reveal>
           <h2>Quem já chamou, recomenda</h2>
-          <p class="score"><strong>4,4</strong> <span class="stars stars-lg" style="--rating: 4.4" aria-label="4,4 de 5 estrelas"></span></p>
-          <p class="score-note">Média de 37 avaliações no Google</p>
+          <p class="score"><strong>4,4</strong> <span class="stars stars-lg" style="--rating: 4.4" role="img" aria-label="4,4 de 5 estrelas"></span></p>
+          <p class="score-note">Média de 37 avaliações no Google, consultada em outubro de 2026</p>
           <div class="reviews-actions">
             <a class="btn btn-outline" href="https://www.google.com/maps/place/Rei+das+Antenas+seguran%C3%A7a+e+servi%C3%A7os/@-22.7549328,-47.4125327,17z/data=!4m6!3m5!1s0x94c89db45463dc47:0xe717f4c3c1a1a3ba!8m2!3d-22.7549328!4d-47.4125327!16s%2Fg%2F11d_th1rpf" target="_blank" rel="noopener">Ver avaliações no Google</a>
             <!-- TODO: trocar pelo link curto oficial de avaliação (Perfil da Empresa > Pedir avaliações) -->
@@ -441,17 +442,17 @@
         <!-- Trechos de avaliações públicas do Google. TODO: confirmar com a loja antes de publicar oficialmente -->
         <div class="quotes">
           <figure class="quote" data-reveal>
-            <span class="stars" style="--rating: 5" aria-label="5 estrelas"></span>
+            <span class="stars" style="--rating: 5" role="img" aria-label="5 estrelas"></span>
             <blockquote>“Trabalho excelente, profissional capacitados, nota 10.”</blockquote>
             <figcaption>Cliente no Google</figcaption>
           </figure>
           <figure class="quote" data-reveal>
-            <span class="stars" style="--rating: 5" aria-label="5 estrelas"></span>
+            <span class="stars" style="--rating: 5" role="img" aria-label="5 estrelas"></span>
             <blockquote>“Muito ótimo o serviço e valor compensável. Fora que o atendente testa o produto na hora.”</blockquote>
-            <figcaption>Luis Felipe, no Google</figcaption>
+            <figcaption>Cliente no Google</figcaption>
           </figure>
           <figure class="quote" data-reveal>
-            <span class="stars" style="--rating: 5" aria-label="5 estrelas"></span>
+            <span class="stars" style="--rating: 5" role="img" aria-label="5 estrelas"></span>
             <blockquote>“Bom atendimento, achei tudo que procurava. Loja ótima no seguimento.”</blockquote>
             <figcaption>Cliente no Google</figcaption>
           </figure>
@@ -506,11 +507,17 @@
           </dl>
         </div>
 
-        <div class="map">
-          <iframe
-            title="Mapa da loja Rei das Antenas"
-            src="https://www.google.com/maps?q=Rua%20XV%20de%20Novembro%2C%20535%2C%20Santa%20B%C3%A1rbara%20d'Oeste%20SP&output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- o mapa do Google só carrega depois do clique: antes disso, nenhum dado vai para o Google (LGPD) -->
+        <div class="map" id="mapa" data-src="https://www.google.com/maps?q=Rua%20XV%20de%20Novembro%2C%20535%2C%20Santa%20B%C3%A1rbara%20d'Oeste%20SP&amp;output=embed">
+          <div class="map-facade">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <p class="map-title">Rua XV de Novembro, 535 · Centro</p>
+            <p class="map-note">O mapa vem do Google Maps. Ao carregar, o Google recebe dados da sua visita, como o endereço IP, e pode usar cookies próprios. <a href="privacidade.html#terceiros">Saiba mais</a>.</p>
+            <div class="map-actions">
+              <button type="button" class="btn btn-light" id="mapLoad">Carregar o mapa</button>
+              <a class="map-link" href="https://www.google.com/maps/place/Rei+das+Antenas+seguran%C3%A7a+e+servi%C3%A7os/@-22.7549328,-47.4125327,17z/data=!4m6!3m5!1s0x94c89db45463dc47:0xe717f4c3c1a1a3ba!8m2!3d-22.7549328!4d-47.4125327!16s%2Fg%2F11d_th1rpf" target="_blank" rel="noopener">Abrir no Google Maps ↗</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -520,7 +527,12 @@
   <footer class="footer">
     <div class="wrap footer-inner">
       <p>© <span id="year"></span> Rei das Antenas. Santa Bárbara d'Oeste, SP.</p>
-      <a href="https://www.facebook.com/profile.php?id=100067492614341" target="_blank" rel="noopener">Facebook</a>
+      <nav class="footer-legal" aria-label="Informações legais">
+        <a href="privacidade.html">Política de privacidade</a>
+        <a href="privacidade.html#cookies">Cookies</a>
+        <a href="termos.html">Termos de uso</a>
+        <a href="https://www.facebook.com/profile.php?id=100067492614341" target="_blank" rel="noopener">Facebook</a>
+      </nav>
     </div>
   </footer>
 
@@ -531,6 +543,7 @@
     <a href="tel:+551941223611" class="mb-call">Ligar</a>
   </div>
 
-  <script src="js/main.js?v=12"></script>
+  <script src="js/main.js?v=14"></script>
+  <script src="js/aviso.js?v=1"></script>
 </body>
 </html>

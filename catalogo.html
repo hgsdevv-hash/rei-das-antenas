@@ -6,12 +6,13 @@
   <title>Catálogo de produtos | Rei das Antenas</title>
   <meta name="description" content="Instalação e manutenção de antenas digitais e parabólicas, câmeras de segurança, portões automáticos e eletrônicos em Santa Bárbara d'Oeste. Loja de peças no Centro, nota 4,4 no Google.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,700..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=12">
+  <link rel="preload" href="fonts/archivo-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body class="page-catalogo" id="topo">
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- ===== Navegação ===== -->
   <header class="nav">
@@ -48,7 +49,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
 
     <nav class="wrap breadcrumb" aria-label="Você está em"><a href="index.html">Início</a> / Catálogo</nav>
 
@@ -180,15 +181,23 @@
   <footer class="footer">
     <div class="wrap footer-inner">
       <p>© <span id="year"></span> Rei das Antenas. Santa Bárbara d'Oeste, SP.</p>
-      <a href="https://www.facebook.com/profile.php?id=100067492614341" target="_blank" rel="noopener">Facebook</a>
+      <nav class="footer-legal" aria-label="Informações legais">
+        <a href="privacidade.html">Política de privacidade</a>
+        <a href="privacidade.html#cookies">Cookies</a>
+        <a href="termos.html">Termos de uso</a>
+        <a href="https://www.facebook.com/profile.php?id=100067492614341" target="_blank" rel="noopener">Facebook</a>
+      </nav>
     </div>
   </footer>
 
   <!-- WhatsApp sempre à mão -->
-  <a class="whats-float" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20do%20site." target="_blank" rel="noopener" aria-label="Falar com a loja no WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-  </a>
+  <aside aria-label="Atalho do WhatsApp">
+    <a class="whats-float" href="https://wa.me/5519974094897?text=Ol%C3%A1!%20Vim%20pelo%20cat%C3%A1logo%20do%20site." target="_blank" rel="noopener" aria-label="Falar com a loja no WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+    </a>
+  </aside>
 
   <script src="js/catalogo.js?v=13"></script>
+  <script src="js/aviso.js?v=1"></script>
 </body>
 </html>

@@ -419,6 +419,14 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .contact-info a { text-underline-offset: 4px; }
 .map { min-height: 340px; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255, 255, 255, .15); }
 .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; filter: grayscale(.25); }
+.map-facade { display: grid; place-content: center; justify-items: center; gap: .6rem; height: 100%; min-height: 340px; padding: 1.5rem; text-align: center; background: var(--navy-2); color: var(--white); }
+.map-facade svg { width: 40px; height: 40px; fill: none; stroke: var(--white); stroke-width: 1.6; }
+.map-title { font-weight: 700; }
+.map-note { max-width: 42ch; font-size: .9rem; color: rgba(255, 255, 255, .78); }
+.map-note a, .map-link { color: var(--white); text-underline-offset: 3px; }
+.map-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem 1.2rem; margin-top: .4rem; }
+.map-actions .btn { border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+.map-link { font-weight: 600; }
 
 /* ---------- Rodapé ---------- */
 .footer { background: #0b1433; color: rgba(255, 255, 255, .65); font-size: .9rem; }
@@ -723,8 +731,8 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .catalog-page h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--navy); }
 .catalog-page .section-head p { max-width: 60ch; }
 
-.btn-whats { background: #1f9d55; color: var(--white); }
-.btn-whats:hover { background: #17834a; }
+.btn-whats { background: #15803d; color: var(--white); }   /* verde escuro: contraste 5:1 com texto branco */
+.btn-whats:hover { background: #116a33; }
 .not-found { background: var(--navy); color: var(--white); }
 .not-found-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 3rem 0; }
 .not-found h2 { color: var(--white); font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
@@ -821,6 +829,54 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .player-close { position: absolute; top: -12px; right: -12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--white); color: var(--navy); font-size: 1.6rem; font-weight: 700; line-height: 1; cursor: pointer; box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .5); }
 .player-close:hover { background: var(--red); color: var(--white); }
 
+/* ---------- Acessibilidade: pular para o conteúdo ---------- */
+.skip-link { position: absolute; left: 1rem; top: -100px; z-index: 200; padding: .7rem 1rem; border-radius: 8px; background: var(--white); color: var(--navy); font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px -8px rgba(0, 0, 0, .4); }
+.skip-link:focus { top: .6rem; }
+
+/* ---------- Aviso de privacidade (cookies) ---------- */
+.aviso {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 560px;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 18px 40px -18px rgba(17, 29, 72, .55);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.aviso a { color: var(--blue); font-weight: 600; text-underline-offset: 3px; }
+.aviso .btn { flex: none; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+
+/* ---------- Páginas de política e termos ---------- */
+.legal { padding: 1.4rem 0 clamp(4rem, 9vw, 6rem); }
+.legal .wrap { max-width: 780px; }
+.legal h1 { margin-bottom: .6rem; font-size: clamp(2rem, 5vw, 3rem); color: var(--navy); }
+.legal .legal-meta { margin-bottom: 2rem; color: var(--ink-2); }
+.legal .legal-resumo { margin-bottom: 2.4rem; padding: 1.2rem 1.4rem; border-left: 4px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0; background: var(--paper); }
+.legal .legal-resumo ul { margin: .5rem 0 0 1.2rem; }
+.legal h2 { margin: 2.4rem 0 .8rem; font-size: clamp(1.35rem, 3vw, 1.7rem); scroll-margin-top: 90px; }
+.legal h3 { margin: 1.4rem 0 .4rem; color: var(--navy); }
+.legal p, .legal li { color: var(--ink); }
+.legal p + p { margin-top: .8rem; }
+.legal ul, .legal ol { margin: .6rem 0 0 1.3rem; display: grid; gap: .35rem; }
+.legal a { color: var(--blue); text-underline-offset: 3px; }
+.legal .tabela { width: 100%; margin-top: .8rem; overflow-x: auto; }
+.legal table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: .93rem; }
+.legal th, .legal td { padding: .65rem .7rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.legal th { background: var(--paper); color: var(--navy); }
+.legal code { padding: .1rem .35rem; border-radius: 5px; background: var(--paper); font-size: .88em; }
+
+/* links das políticas no rodapé */
+.footer-legal { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
+.footer-legal a { text-underline-offset: 3px; }
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 980px) {
   /* telefone sai do topo para os links caberem (ele continua no botão Ligar e no contato) */
@@ -893,6 +949,8 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .footer-inner { flex-direction: column; }
 
   body { padding-bottom: 68px; }
+  .aviso { left: .75rem; right: .75rem; bottom: calc(68px + .75rem); flex-direction: column; align-items: stretch; max-width: none; }
+  .page-catalogo .aviso, .page-legal .aviso { bottom: .75rem; }
   .mobile-bar {
     position: fixed;
     inset: auto 0 0;
