@@ -1,0 +1,13 @@
+/* EQUIPE */
+Site por: HGS Dev
+Site: https://hgsdev.com.br
+
+/* CLIENTE */
+Rei das Antenas segurança e serviços
+Santa Bárbara d'Oeste, SP
+
+/* SITE */
+Atualizado em: 2026/10/29
+Idioma: português (Brasil)
+Feito com: HTML, CSS e JavaScript
+Hospedagem: GitHub Pages

@@ -1,0 +1,16 @@
+{
+  "name": "Rei das Antenas segurança e serviços",
+  "short_name": "Rei das Antenas",
+  "description": "Antenas, câmeras, portões e eletrônicos em Santa Bárbara d'Oeste.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#111d48",
+  "theme_color": "#111d48",
+  "icons": [
+    { "src": "/assets/img/favicon-96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
